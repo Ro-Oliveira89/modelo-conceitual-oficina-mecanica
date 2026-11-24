@@ -1,180 +1,177 @@
-# 🛠️ Modelo Conceitual – Oficina Mecânica
+# 🔧 Projeto de Banco de Dados para Oficina Mecânica
 
-## 📌 Descrição do Projeto
-Este projeto apresenta a construção de um **modelo conceitual de banco de dados** para um **Sistema de Controle e Gerenciamento de Ordens de Serviço (OS)** em uma oficina mecânica.
+## 📌 Descrição
 
-O modelo foi desenvolvido a partir de uma narrativa fornecida como desafio de projeto, com o objetivo de identificar corretamente as **entidades**, **atributos** e **relacionamentos** envolvidos no contexto de uma oficina mecânica.
+Projeto desenvolvido como parte dos desafios da formação SQL Database Specialist da DIO.
 
-Sempre que a narrativa não detalhou explicitamente alguma informação, foram realizadas **inferências coerentes com o domínio do problema**, devidamente justificadas neste documento.
+O projeto iniciou com a modelagem conceitual de um sistema de controle e gerenciamento de Ordens de Serviço (OS) para uma oficina mecânica e evoluiu para a implementação completa de um banco de dados relacional utilizando MySQL.
+
+Além da modelagem, foram desenvolvidos:
+
+- Modelo lógico
+- Implementação do banco de dados
+- Inserção de dados para testes
+- Consultas SQL para análise das informações
 
 ---
 
 ## 🎯 Objetivo
-Criar um **esquema conceitual (Modelo Entidade-Relacionamento)** que represente:
-- O cadastro de clientes e seus veículos
-- A organização de equipes de mecânicos
-- O controle de ordens de serviço
-- A execução de serviços e utilização de peças
-- O cálculo do valor total da ordem de serviço
+
+Representar de forma estruturada os processos de uma oficina mecânica, incluindo:
+
+- Cadastro de clientes
+- Cadastro de veículos
+- Controle de equipes e mecânicos
+- Gestão de ordens de serviço
+- Controle de serviços executados
+- Controle de peças utilizadas
+- Cálculo dos valores das ordens de serviço
 
 ---
 
 ## 🧩 Contexto do Sistema
+
 Em uma oficina mecânica:
 
-- Clientes levam seus veículos para **consertos ou revisões periódicas**
-- Cada veículo é designado a uma **equipe de mecânicos**
-- A equipe avalia o veículo e cria uma **Ordem de Serviço (OS)**
-- A OS contém data de emissão, prazo de conclusão, status e valor total
-- O valor da OS é calculado com base:
-  - Na **tabela de referência de mão de obra**
-  - No **valor das peças utilizadas**
-- O cliente **autoriza a execução dos serviços**
-- A mesma equipe que avalia é responsável pela execução
+- Clientes levam veículos para manutenção ou revisão.
+- Cada veículo pertence a um cliente.
+- Equipes de mecânicos são responsáveis pela avaliação e execução dos serviços.
+- Ordens de Serviço (OS) registram os atendimentos realizados.
+- Serviços e peças são vinculados às ordens de serviço.
+- O cliente deve autorizar a execução dos serviços.
+- O valor total da OS é calculado com base nos serviços executados e peças utilizadas.
 
 ---
 
-## 🏗️ Entidades Identificadas
+## 🏗️ Modelo de Dados
 
-### ✅ Cliente
-Armazena as informações do cliente da oficina.
-- id_cliente
-- nome
-- telefone
-- endereço
+### Principais Entidades
 
-> 🔎 Inferência: dados de contato do cliente não foram especificados na narrativa, mas são essenciais para o funcionamento do sistema.
+- Cliente
+- Veículo
+- Equipe
+- Mecânico
+- Ordem de Serviço
+- Serviço
+- Tabela de Mão de Obra
+- Peça
 
----
+### Entidades Associativas
 
-### ✅ Veículo
-Representa os veículos levados à oficina.
-- id_veiculo
-- placa
-- marca
-- modelo
-- ano
-- id_cliente
+- OS_Serviço
+- OS_Peça
 
-**Relacionamento:**  
-Um cliente pode possuir vários veículos, mas cada veículo pertence a apenas um cliente (1:N).
+### Relacionamentos
 
----
-
-### ✅ Equipe
-Agrupa os mecânicos responsáveis por avaliar e executar serviços.
-- id_equipe
-- nome_equipe
-
-> 🔎 Inferência: a narrativa menciona equipes, mas não define atributos. Foi criado um identificador e um nome para organização.
+- Um cliente pode possuir vários veículos.
+- Um veículo pertence a um único cliente.
+- Uma equipe pode possuir vários mecânicos.
+- Uma Ordem de Serviço está vinculada a um veículo.
+- Uma Ordem de Serviço está vinculada a uma equipe.
+- Uma Ordem de Serviço pode possuir vários serviços.
+- Uma Ordem de Serviço pode utilizar várias peças.
 
 ---
 
-### ✅ Mecânico
-Representa os profissionais da oficina.
-- cod_mecanico
-- nome
-- endereço
-- especialidade
-- id_equipe
+## 🛠️ Tecnologias Utilizadas
 
-**Relacionamento:**  
-Uma equipe pode ter vários mecânicos; um mecânico pertence a uma única equipe (1:N).
+- MySQL
+- SQL
+- MySQL Workbench
+- GitHub
 
 ---
 
-### ✅ Ordem de Serviço (OS)
-Controla os serviços executados em um veículo.
-- num_os
-- data_emissao
-- data_conclusao
-- status
-- valor_total
-- autorizacao_cliente
-- id_veiculo
-- id_equipe
+## 📂 Estrutura do Projeto
 
-**Relacionamentos:**
-- Um veículo pode possuir várias ordens de serviço
-- Uma equipe pode ser responsável por várias ordens de serviço
+### oficina.sql
 
----
+Arquivo contendo:
 
-### ✅ Serviço
-Representa os serviços que podem ser executados.
-- id_servico
-- descricao
-- valor_mao_obra
+- Criação do banco de dados
+- Criação das tabelas
+- Relacionamentos
+- Inserção dos dados para testes
+- Consultas SQL
+
+### Oficina.mwb
+
+Arquivo do modelo desenvolvido no MySQL Workbench.
+
+### Oficina (SQL).png
+
+Imagem do modelo lógico utilizado no banco de dados.
 
 ---
 
-### ✅ Tabela de Referência de Mão de Obra
-Usada para calcular o valor dos serviços.
-- id_referencia
-- descricao_servico
-- valor_hora
+## 📊 Consultas Desenvolvidas
+
+Foram implementadas consultas contendo:
+
+### SELECT
+
+Recuperação de clientes, veículos, serviços e ordens de serviço.
+
+### WHERE
+
+Filtragem de ordens de serviço por status e valor.
+
+### CASE
+
+Criação de atributos derivados para classificação dos serviços.
+
+### ORDER BY
+
+Ordenação das ordens de serviço por valor.
+
+### HAVING
+
+Identificação de clientes com mais de uma ordem de serviço.
+
+### JOIN
+
+Relacionamentos entre:
+
+- Clientes e veículos
+- Equipes e mecânicos
+- Ordens de serviço e serviços
+- Ordens de serviço e peças
 
 ---
 
-### ✅ Peça
-Representa peças utilizadas nos serviços.
-- id_peca
-- descricao
-- valor_unitario
+## ✅ Resultados
+
+O banco de dados foi implementado com sucesso.
+
+Foram realizadas:
+
+- Criação do esquema relacional
+- Inserção de dados de teste
+- Validação dos relacionamentos
+- Execução das consultas SQL
+
+Todas as tabelas, relacionamentos, inserções e consultas executaram sem erros.
 
 ---
 
-## 🔗 Entidades Associativas
+## 📚 Evolução do Projeto
 
-### ✅ OS_Serviço
-Relaciona ordens de serviço e serviços executados.
-- num_os
-- id_servico
-- quantidade
-- valor_servico
+Este projeto evoluiu através das seguintes etapas:
 
-**Relacionamento:**  
-Uma OS pode conter vários serviços e um serviço pode aparecer em várias OS (N:N).
+✅ Modelo Conceitual (ER)
 
----
+✅ Modelo Lógico
 
-### ✅ OS_Peça
-Relaciona ordens de serviço e peças utilizadas.
-- num_os
-- id_peca
-- quantidade
-- valor_total_peca
+✅ Implementação Física (SQL)
 
-**Relacionamento:**  
-Uma OS pode utilizar várias peças e uma peça pode ser usada em várias OS (N:N).
+✅ Persistência de Dados
+
+✅ Consultas SQL para Análise
 
 ---
 
-## 📜 Regras de Negócio
-- Uma Ordem de Serviço só pode ser executada após **autorização do cliente**
-- O valor total da OS é a soma:
-  - Dos serviços executados
-  - Das peças utilizadas
-- A mesma equipe avalia e executa os serviços
-- Um mecânico pertence a apenas uma equipe
-- Um veículo pertence a apenas um cliente
+## 👨‍💻 Autor
 
----
+Rodrigo Oliveira
 
-## 🖼️ Diagrama
-O diagrama do modelo conceitual está disponível neste repositório no arquivo:
-
-📄 `<img width="866" height="865" alt="Oficina (SQL)" src="https://github.com/user-attachments/assets/b325f487-7070-496e-bfb2-4c20360b2a41" />
-`  
-*(ou em outro formato conforme a ferramenta utilizada)*
-
----
-
-## ✅ Conclusão
-O modelo conceitual desenvolvido atende aos requisitos apresentados na narrativa, representando de forma clara e organizada as principais entidades, relacionamentos e regras de negócio de uma oficina mecânica.
-
-Este esquema serve como base sólida para a evolução do projeto para os modelos **lógico** e **físico** de banco de dados.
-
----
-
-📚 **Projeto desenvolvido para fins educacionais.**
+Projeto desenvolvido para fins educacionais durante a formação SQL Database Specialist da DIO.
