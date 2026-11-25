@@ -1,75 +1,101 @@
-# 🔧 Projeto de Banco de Dados para Oficina Mecânica
+# 🔧 Banco de Dados para Oficina Mecânica
+
+<p align="center">
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MySQL%20Workbench-217346?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Database%20Modeling-00599C?style=for-the-badge"/>
+</p>
+
+---
 
 ## 📌 Descrição
 
-Projeto desenvolvido como parte dos desafios da formação SQL Database Specialist da DIO.
+Projeto desenvolvido durante a formação SQL Database Specialist da DIO com o objetivo de modelar e implementar um banco de dados para gerenciamento de uma oficina mecânica.
 
-O projeto iniciou com a modelagem conceitual de um sistema de controle e gerenciamento de Ordens de Serviço (OS) para uma oficina mecânica e evoluiu para a implementação completa de um banco de dados relacional utilizando MySQL.
+O sistema contempla clientes, veículos, equipes de mecânicos, ordens de serviço, serviços executados e peças utilizadas nos reparos.
 
-Além da modelagem, foram desenvolvidos:
-
-- Modelo lógico
-- Implementação do banco de dados
-- Inserção de dados para testes
-- Consultas SQL para análise das informações
+Além da modelagem conceitual e lógica, foi realizada a implementação física em MySQL, inserção de dados para testes e desenvolvimento de consultas SQL para análise das informações.
 
 ---
 
-## 🎯 Objetivo
+## 📸 Visão Geral do Modelo
 
-Representar de forma estruturada os processos de uma oficina mecânica, incluindo:
+Abaixo está o Diagrama Entidade-Relacionamento (DER) utilizado na implementação do banco de dados.
 
-- Cadastro de clientes
-- Cadastro de veículos
-- Controle de equipes e mecânicos
-- Gestão de ordens de serviço
-- Controle de serviços executados
-- Controle de peças utilizadas
-- Cálculo dos valores das ordens de serviço
+<p align="center">
+  <img src="oficina-sql.png" alt="DER Oficina Mecânica" width="1000">
+</p>
+
+O modelo representa os principais relacionamentos envolvidos no fluxo operacional de uma oficina mecânica.
 
 ---
 
-## 🧩 Contexto do Sistema
+## 🎯 Objetivos do Projeto
 
-Em uma oficina mecânica:
-
-- Clientes levam veículos para manutenção ou revisão.
-- Cada veículo pertence a um cliente.
-- Equipes de mecânicos são responsáveis pela avaliação e execução dos serviços.
-- Ordens de Serviço (OS) registram os atendimentos realizados.
-- Serviços e peças são vinculados às ordens de serviço.
-- O cliente deve autorizar a execução dos serviços.
-- O valor total da OS é calculado com base nos serviços executados e peças utilizadas.
+- Construir o modelo conceitual do sistema;
+- Desenvolver o modelo lógico relacional;
+- Implementar o banco de dados em MySQL;
+- Inserir dados para validação;
+- Desenvolver consultas SQL;
+- Validar os relacionamentos entre as entidades.
 
 ---
 
-## 🏗️ Modelo de Dados
+## 🏗️ Estrutura do Banco de Dados
 
-### Principais Entidades
+O projeto contempla entidades relacionadas a:
 
-- Cliente
-- Veículo
-- Equipe
-- Mecânico
-- Ordem de Serviço
-- Serviço
-- Tabela de Mão de Obra
-- Peça
+### Clientes
 
-### Entidades Associativas
+- Clientes
 
-- OS_Serviço
-- OS_Peça
+### Veículos
 
-### Relacionamentos
+- Veículos
 
-- Um cliente pode possuir vários veículos.
-- Um veículo pertence a um único cliente.
-- Uma equipe pode possuir vários mecânicos.
-- Uma Ordem de Serviço está vinculada a um veículo.
-- Uma Ordem de Serviço está vinculada a uma equipe.
-- Uma Ordem de Serviço pode possuir vários serviços.
-- Uma Ordem de Serviço pode utilizar várias peças.
+### Mecânicos
+
+- Mecânicos
+- Equipes
+
+### Ordens de Serviço
+
+- Ordens de Serviço
+- Serviços Executados
+
+### Peças
+
+- Peças utilizadas nos reparos
+
+---
+
+## 🧩 Regras de Negócio Implementadas
+
+### ✅ Controle de Ordens de Serviço
+
+Cada ordem de serviço possui:
+
+- Data de emissão;
+- Status;
+- Valor;
+- Equipe responsável.
+
+---
+
+### ✅ Associação entre Veículos e Clientes
+
+Os veículos são vinculados aos respectivos clientes proprietários.
+
+---
+
+### ✅ Controle de Serviços e Peças
+
+O sistema permite registrar:
+
+- Serviços executados;
+- Peças utilizadas;
+- Custos envolvidos nos reparos.
 
 ---
 
@@ -78,100 +104,129 @@ Em uma oficina mecânica:
 - MySQL
 - SQL
 - MySQL Workbench
+- Git
 - GitHub
 
 ---
 
 ## 📂 Estrutura do Projeto
 
-### oficina.sql
+```text
+modelo-conceitual-oficina-mecanica
+│
+├── README.md
+├── oficina.sql
+├── Oficina.mwb
+└── oficina-sql.png
+```
+
+### 📄 oficina.sql
 
 Arquivo contendo:
 
-- Criação do banco de dados
-- Criação das tabelas
-- Relacionamentos
-- Inserção dos dados para testes
-- Consultas SQL
+- Criação do banco de dados;
+- Criação das tabelas;
+- Definição dos relacionamentos;
+- Inserção dos dados para testes;
+- Consultas SQL.
 
-### Oficina.mwb
+### 📄 Oficina.mwb
 
 Arquivo do modelo desenvolvido no MySQL Workbench.
 
-### Oficina (SQL).png
+### 🖼️ oficina-sql.png
 
-Imagem do modelo lógico utilizado no banco de dados.
+Imagem do Diagrama Entidade-Relacionamento (DER).
 
 ---
 
-## 📊 Consultas Desenvolvidas
+## 🔍 Consultas Desenvolvidas
 
-Foram implementadas consultas contendo:
+O projeto contempla consultas utilizando:
 
-### SELECT
+- SELECT
+- WHERE
+- ORDER BY
+- HAVING
+- JOIN
+- CASE
+- COUNT()
 
-Recuperação de clientes, veículos, serviços e ordens de serviço.
+---
 
-### WHERE
+## 📊 Exemplos de Consultas
 
-Filtragem de ordens de serviço por status e valor.
+Entre as análises realizadas estão:
 
-### CASE
-
-Criação de atributos derivados para classificação dos serviços.
-
-### ORDER BY
-
-Ordenação das ordens de serviço por valor.
-
-### HAVING
-
-Identificação de clientes com mais de uma ordem de serviço.
-
-### JOIN
-
-Relacionamentos entre:
-
-- Clientes e veículos
-- Equipes e mecânicos
-- Ordens de serviço e serviços
-- Ordens de serviço e peças
+- Ordens de serviço por cliente;
+- Veículos cadastrados;
+- Serviços executados;
+- Equipes responsáveis pelos reparos;
+- Relação entre ordens de serviço e peças utilizadas;
+- Controle e acompanhamento do status das ordens.
 
 ---
 
 ## ✅ Resultados
 
-O banco de dados foi implementado com sucesso.
+O banco de dados foi implementado com sucesso em MySQL.
 
-Foram realizadas:
+Foram realizados:
 
-- Criação do esquema relacional
-- Inserção de dados de teste
-- Validação dos relacionamentos
-- Execução das consultas SQL
+✅ Modelagem conceitual;
 
-Todas as tabelas, relacionamentos, inserções e consultas executaram sem erros.
+✅ Modelagem lógica;
+
+✅ Implementação física;
+
+✅ Inserção de dados para testes;
+
+✅ Desenvolvimento de consultas SQL;
+
+✅ Validação dos relacionamentos.
 
 ---
 
-## 📚 Evolução do Projeto
+## 🚀 Competências Demonstradas
 
-Este projeto evoluiu através das seguintes etapas:
-
-✅ Modelo Conceitual (ER)
-
-✅ Modelo Lógico
-
-✅ Implementação Física (SQL)
-
-✅ Persistência de Dados
-
-✅ Consultas SQL para Análise
+- Modelagem Conceitual
+- Modelagem Lógica
+- Banco de Dados Relacional
+- SQL
+- MySQL
+- MySQL Workbench
+- Relacionamentos entre Entidades
+- Chaves Primárias e Estrangeiras
+- Consultas SQL
+- Regras de Negócio
+- Documentação Técnica
 
 ---
 
 ## 👨‍💻 Autor
 
-Rodrigo Oliveira
+**Rodrigo Oliveira**
 
-Projeto desenvolvido para fins educacionais durante a formação SQL Database Specialist da DIO.
+🔗 LinkedIn:  
+https://www.linkedin.com/in/rodrigooliveira89
+
+🔗 GitHub:  
+https://github.com/Ro-Oliveira89
+
+---
+
+## 📚 Formação Relacionada
+
+Projeto desenvolvido durante a formação **SQL Database Specialist** da DIO.
+
+---
+
+## 📌 Status do Projeto
+
+✅ Concluído
+
+✅ Documentado
+
+✅ Publicado no GitHub
+
+✅ Validado em MySQL
